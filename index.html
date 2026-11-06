@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oficina Pistão Forte | Mecânica em geral (site de exemplo)</title>
+  <meta name="description" content="Site de demonstração criado pela Magno Digital para oficinas mecânicas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ====== Cores da oficina: troque aqui para outro cliente ====== */
+    :root {
+      --grafite: #16191d;
+      --grafite-2: #22272d;
+      --amarelo: #f5b800;
+      --amarelo-escuro: #d49f00;
+      --texto: #1c1f23;
+      --suave: #5d646d;
+      --fundo: #f5f6f7;
+      --raio: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      color: var(--texto);
+      background-color: var(--fundo);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Barlow Condensed', Arial, sans-serif;
+      text-transform: uppercase;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    .demo {
+      background-color: var(--amarelo);
+      color: var(--grafite);
+      text-align: center;
+      font-size: 14px;
+      padding: 8px 16px;
+      font-weight: 600;
+    }
+    .demo a { color: var(--grafite); }
+
+    .botao {
+      display: inline-block;
+      background-color: var(--amarelo);
+      color: var(--grafite);
+      padding: 14px 28px;
+      border-radius: var(--raio);
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+    .botao:hover { transform: translateY(-2px); background-color: var(--amarelo-escuro); }
+    .botao-contorno { background-color: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
+    .botao-contorno:hover { background-color: rgba(255,255,255,0.08); }
+
+    .topo { background-color: var(--grafite); position: sticky; top: 0; z-index: 10; border-bottom: 3px solid var(--amarelo); }
+    .topo .container {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 12px; padding-bottom: 12px; gap: 16px;
+    }
+    .logo { color: white; text-decoration: none; font-size: 28px; }
+    .logo span { color: var(--amarelo); }
+    .menu { display: flex; gap: 24px; }
+    .menu a { color: rgba(255,255,255,0.8); text-decoration: none; font-weight: 500; }
+    .menu a:hover { color: white; }
+
+    /* Hero */
+    .hero {
+      background:
+        linear-gradient(100deg, rgba(22,25,29,0.97) 45%, rgba(22,25,29,0.75)),
+        repeating-linear-gradient(-45deg, #2d333a 0 14px, #22272d 14px 28px);
+      color: white;
+      padding: 90px 0;
+    }
+    .hero .etiqueta { color: var(--amarelo); }
+    .hero h1 { font-size: 64px; margin: 12px 0 18px; max-width: 700px; }
+    .hero h1 span { color: var(--amarelo); }
+    .hero p { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 540px; }
+    .hero-botoes { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+    .selos {
+      display: flex; flex-wrap: wrap; gap: 14px; margin-top: 44px;
+    }
+    .selo {
+      background-color: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--raio);
+      padding: 12px 18px; font-size: 15px;
+    }
+    .selo strong { color: var(--amarelo); }
+
+    .etiqueta {
+      color: var(--amarelo-escuro); text-transform: uppercase; letter-spacing: 2px;
+      font-size: 13px; font-weight: 700;
+    }
+
+    .secao { padding: 80px 0; }
+    .secao-branca { background-color: white; }
+    .secao h2 { font-size: 44px; margin: 8px 0 36px; }
+
+    /* Serviços */
+    .cartoes { display: flex; flex-wrap: wrap; gap: 20px; }
+    .cartao {
+      flex: 1; min-width: 230px;
+      background-color: white; border-radius: var(--raio);
+      padding: 26px; border-top: 4px solid var(--amarelo);
+      box-shadow: 0 8px 24px rgba(22,25,29,0.06);
+    }
+    .cartao .icone { font-size: 30px; }
+    .cartao h3 { font-size: 24px; margin: 10px 0 8px; }
+    .cartao p { color: var(--suave); }
+
+    /* Como funciona */
+    .passos { display: flex; flex-wrap: wrap; gap: 24px; counter-reset: passo; }
+    .passo { flex: 1; min-width: 220px; }
+    .passo::before {
+      counter-increment: passo;
+      content: counter(passo, decimal-leading-zero);
+      display: block;
+      font-family: 'Barlow Condensed', Arial, sans-serif;
+      font-size: 48px; font-weight: 700; color: var(--amarelo);
+    }
+    .passo h3 { font-size: 24px; margin-bottom: 6px; }
+    .passo p { color: var(--suave); }
+
+    /* Faixa de garantia */
+    .garantia { background-color: var(--amarelo); padding: 50px 0; }
+    .garantia .container { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+    .garantia h2 { font-size: 36px; }
+    .garantia p { max-width: 560px; }
+    .garantia .botao { background-color: var(--grafite); color: white; }
+    .garantia .botao:hover { background-color: var(--grafite-2); }
+
+    /* Local */
+    .local { display: flex; flex-wrap: wrap; gap: 30px; }
+    .local-texto { flex: 1; min-width: 280px; }
+    .local-texto p { margin-bottom: 12px; color: var(--suave); }
+    .local-texto strong { color: var(--texto); }
+    .horarios { list-style: none; margin: 8px 0 24px; }
+    .horarios li { display: flex; justify-content: space-between; max-width: 360px; padding: 8px 0; border-bottom: 1px solid #e2e5e8; }
+    .mapa {
+      flex: 1; min-width: 280px; min-height: 280px; border-radius: var(--raio);
+      background:
+        linear-gradient(rgba(22,25,29,0.6), rgba(22,25,29,0.6)),
+        repeating-linear-gradient(0deg, #3a4048 0 2px, transparent 2px 36px),
+        repeating-linear-gradient(90deg, #3a4048 0 2px, transparent 2px 36px),
+        var(--grafite-2);
+      color: white; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 20px; font-weight: 600;
+    }
+
+    .cta { background-color: var(--grafite); color: white; text-align: center; padding: 70px 0; }
+    .cta h2 { font-size: 40px; margin-bottom: 12px; }
+    .cta p { color: rgba(255,255,255,0.75); margin-bottom: 26px; }
+
+    .rodape { background-color: #0e1013; color: rgba(255,255,255,0.65); text-align: center; padding: 30px 0; font-size: 14px; }
+    .rodape a { color: var(--amarelo); }
+
+    .whats {
+      position: fixed; right: 20px; bottom: 20px;
+      width: 58px; height: 58px; border-radius: 50%;
+      background-color: #25d366; display: flex; align-items: center; justify-content: center;
+      font-size: 28px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.3); z-index: 20;
+    }
+
+    @media (max-width: 760px) {
+      .menu { display: none; }
+      .hero { padding: 60px 0; }
+      .hero h1 { font-size: 42px; }
+      .secao { padding: 56px 0; }
+      .secao h2 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="demo">
+    Site de demonstração · negócio fictício criado pela <a href="https://alexmagno44.github.io/magno-digital/">Magno Digital</a>
+  </div>
+
+  <header class="topo">
+    <div class="container">
+      <a href="#inicio" class="logo">Pistão <span>Forte</span></a>
+      <nav class="menu">
+        <a href="#servicos">Serviços</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#local">Endereço</a>
+      </nav>
+      <a href="https://wa.me/5592991540757?text=Ol%C3%A1!%20Vi%20o%20site%20de%20exemplo%20da%20oficina%20e%20quero%20um%20assim%20para%20o%20meu%20neg%C3%B3cio." class="botao" target="_blank">Orçamento</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <p class="etiqueta">Mecânica em geral · Manaus</p>
+        <h1>Seu carro de volta à pista, <span>sem surpresa no preço.</span></h1>
+        <p>Diagnóstico honesto, orçamento antes de qualquer serviço e fotos das peças trocadas pelo WhatsApp.</p>
+        <div class="hero-botoes">
+          <a href="https://wa.me/5592991540757?text=Ol%C3%A1!%20Vi%20o%20site%20de%20exemplo%20da%20oficina%20e%20quero%20um%20assim%20para%20o%20meu%20neg%C3%B3cio." class="botao" target="_blank">Pedir orçamento no WhatsApp</a>
+          <a href="#servicos" class="botao botao-contorno">Ver serviços</a>
+        </div>
+        <div class="selos">
+          <div class="selo"><strong>Orçamento</strong> antes do serviço</div>
+          <div class="selo"><strong>Garantia</strong> de 90 dias</div>
+          <div class="selo"><strong>Seg a sáb</strong> 7h30 às 18h</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="servicos">
+      <div class="container">
+        <p class="etiqueta">Serviços</p>
+        <h2>O que fazemos</h2>
+        <div class="cartoes">
+          <div class="cartao">
+            <span class="icone">🛢️</span>
+            <h3>Troca de óleo</h3>
+            <p>Óleo e filtros de acordo com o manual do seu carro, em cerca de 30 minutos.</p>
+          </div>
+          <div class="cartao">
+            <span class="icone">🛞</span>
+            <h3>Freios e suspensão</h3>
+            <p>Pastilhas, discos, amortecedores e alinhamento para rodar com segurança.</p>
+          </div>
+          <div class="cartao">
+            <span class="icone">❄️</span>
+            <h3>Ar-condicionado</h3>
+            <p>Higienização, recarga de gás e conserto. Essencial no calor de Manaus.</p>
+          </div>
+          <div class="cartao">
+            <span class="icone">🔍</span>
+            <h3>Diagnóstico eletrônico</h3>
+            <p>Leitura com scanner para achar a falha certa, sem trocar peça no chute.</p>
+          </div>
+          <div class="cartao">
+            <span class="icone">⚙️</span>
+            <h3>Motor e câmbio</h3>
+            <p>Revisão completa, correia dentada, embreagem e retífica.</p>
+          </div>
+          <div class="cartao">
+            <span class="icone">🔋</span>
+            <h3>Elétrica e bateria</h3>
+            <p>Teste e troca de bateria, alternador, motor de partida e iluminação.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao secao-branca" id="como-funciona">
+      <div class="container">
+        <p class="etiqueta">Como funciona</p>
+        <h2>Transparência em cada etapa</h2>
+        <div class="passos">
+          <div class="passo">
+            <h3>Fale pelo WhatsApp</h3>
+            <p>Conte o que o carro está apresentando e agende o melhor horário.</p>
+          </div>
+          <div class="passo">
+            <h3>Diagnóstico</h3>
+            <p>Avaliamos o veículo e enviamos o orçamento detalhado por escrito.</p>
+          </div>
+          <div class="passo">
+            <h3>Você aprova</h3>
+            <p>Nada é feito sem a sua autorização. Você recebe fotos do serviço.</p>
+          </div>
+          <div class="passo">
+            <h3>Carro pronto</h3>
+            <p>Entregamos com as peças antigas e a garantia do serviço.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="garantia">
+      <div class="container">
+        <div>
+          <h2>Garantia de 90 dias</h2>
+          <p>Todo serviço sai com garantia. Se algo não ficar certo, a gente resolve.</p>
+        </div>
+        <a href="https://wa.me/5592991540757?text=Ol%C3%A1!%20Vi%20o%20site%20de%20exemplo%20da%20oficina%20e%20quero%20um%20assim%20para%20o%20meu%20neg%C3%B3cio." class="botao" target="_blank">Agendar avaliação</a>
+      </div>
+    </section>
+
+    <section class="secao" id="local">
+      <div class="container local">
+        <div class="local-texto">
+          <p class="etiqueta">Endereço e horário</p>
+          <h2>Onde estamos</h2>
+          <ul class="horarios">
+            <li><span>Segunda a sexta</span><strong>7h30 às 18h</strong></li>
+            <li><span>Sábado</span><strong>7h30 às 12h</strong></li>
+            <li><span>Domingo</span><strong>Fechado</strong></li>
+          </ul>
+          <p><strong>Endereço:</strong> Avenida de Exemplo, 456 – Bairro – Manaus/AM</p>
+          <p><strong>Pagamento:</strong> Pix, cartão de débito e crédito</p>
+        </div>
+        <!-- No site de um cliente real, aqui entra o mapa do Google Maps (Compartilhar → Incorporar um mapa) -->
+        <div class="mapa">📍 Aqui entra o mapa do Google<br>com a localização da oficina</div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <h2>Gostou deste site?</h2>
+        <p>A Magno Digital cria um assim para a sua oficina, com o seu nome, suas fotos e seus serviços.</p>
+        <a href="https://wa.me/5592991540757?text=Ol%C3%A1!%20Vi%20o%20site%20de%20exemplo%20da%20oficina%20e%20quero%20um%20assim%20para%20o%20meu%20neg%C3%B3cio." class="botao" target="_blank">Quero um site assim</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>Oficina Pistão Forte é um negócio fictício. Site de demonstração feito pela <a href="https://alexmagno44.github.io/magno-digital/">Magno Digital</a>.</p>
+  </footer>
+
+  <a href="https://wa.me/5592991540757?text=Ol%C3%A1!%20Vi%20o%20site%20de%20exemplo%20da%20oficina%20e%20quero%20um%20assim%20para%20o%20meu%20neg%C3%B3cio." class="whats" target="_blank" aria-label="WhatsApp">💬</a>
+
+</body>
+</html>
